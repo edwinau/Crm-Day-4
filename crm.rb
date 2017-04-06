@@ -92,3 +92,7 @@ put '/contacts/:id/edit' do
     raise Sinatra::NotFound
   end
 end
+
+after do
+  ActiveRecord::Base.connection.close
+end
