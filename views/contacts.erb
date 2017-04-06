@@ -1,0 +1,13 @@
+<h1 class=h1contactserb>There are <span class=contactspananswers><%=Contact.all.count%></span> contacts</h1>
+
+<ul>
+
+<% Contact.all.each do |contact| %>
+<div class=contacts_each>
+<li><a href=/contacts/<%=contact.id%>> <%= contact.first_name %> <%= contact.last_name %></a></li>
+    <p class=contacts_p><a href="/contacts/<%=contact.id%>/edit">Edit</a></p>
+    <p class=contacts_p><a href="/contacts/<%=contact.id%>/delete">Delete</a></p>
+</div>
+<% end %>
+
+</ul>
