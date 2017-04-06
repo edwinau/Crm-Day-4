@@ -4,11 +4,13 @@
 require_relative "contact"
 require "sinatra"
 
-Contact.create("Edwin", "Au", "edwinau@rogers.com","CEO")
-Contact.create("Greg", "Boone", "Boonev@rogers.com","CEO")
-Contact.create('Mark', 'Zuckerberg', 'mark@facebook.com', 'CEO')
-Contact.create('Sergey', 'Brin', 'sergey@google.com', 'Co-Founder')
-Contact.create('Steve', 'Jobs', 'steve@apple.com', 'Visionary')
+Contact.destroy_all
+
+Contact.create(first_name: "Edwin", last_name: "Au", email: "edwinau@rogers.com", note: "xoxo")
+Contact.create(first_name: "Greg", last_name: "Boone", email: "Boonev@rogers.com", note: "CEO")
+Contact.create(first_name: "Mark", last_name: "Zuckerberg", email: "mark@facebook.com", note: "CEO")
+Contact.create(first_name: 'Sergey', last_name: 'Brin', email:  "sergey@google.com", note: "Co-Founder")
+Contact.create(first_name: "Steve", last_name: "Jobs", email: "steve@apple.com", note: "Visionary")
 
 
 get "/" do
@@ -26,7 +28,12 @@ get "/new_contact" do
 end
 
 post '/contacts' do
-  Contact.create(params[:first_name],params[:last_name],params[:email],params[:note])
+  contact = Contact.create(
+    first_name: params[:first_name],
+    last_name:  params[:last_name],
+    email:      params[:email],
+    note:       params[:note]
+  )
   redirect to('/contacts')
 end
 
